@@ -81,7 +81,7 @@ class ProductController extends Controller
         $product->update($request->all());
 
 
-        return redirect('products');
+        // return redirect('products');
     }
 
     /**
