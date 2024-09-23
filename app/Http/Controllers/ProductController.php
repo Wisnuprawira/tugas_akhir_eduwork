@@ -39,16 +39,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'pd_code' => ['required'],
-            'pd_ct_id' => ['required'],
-            'pd_name' => ['required'],
-            'pd_price' => ['required'],
-        ]);
+        // $this->validate($request,[
+        //     'pd_code' => ['required'],
+        //     'pd_ct_id' => ['required'],
+        //     'pd_name' => ['required'],
+        //     'pd_price' => ['required'],
+        // ]);
 
-        Product::create($request->all());
+        // Product::create($request->all());
 
-        return redirect('products')->with('success', 'Member Created Successfully');
+        // return redirect('products')->with('success', 'Member Created Successfully');
     }
 
     /**
