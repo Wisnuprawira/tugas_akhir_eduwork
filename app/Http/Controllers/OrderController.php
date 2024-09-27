@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -12,10 +13,13 @@ class OrderController extends Controller
      */
     public function index()
     {
+        $products = Product::all();
+        return view('admin.order.index',compact('products'));
+    }
+
+    public function api(){
         $orders = Order::all();
-
-
-        return view('admin.order.index', compact('orders'));
+        return json_encode($orders);
     }
 
     /**
@@ -23,7 +27,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -31,7 +35,13 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'or_pd_id' => 'required',
+            'or_amount' => 'required',
+        ]);
+        // Simpan produk baru
+        $order = Order::create($validatedData);
+        return redirect('orders');
     }
 
     /**
@@ -55,7 +65,11 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $validatedData = $request->validate([
+            'or_pd_id' => 'required',
+            'or_amount' => 'required',
+        ]);
+        $order->update($validatedData);
     }
 
     /**
@@ -63,6 +77,7 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+        return response()->json(['message' => 'Order deleted successfully'], 200);
     }
 }

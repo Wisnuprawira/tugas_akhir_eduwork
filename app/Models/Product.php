@@ -11,9 +11,9 @@ class Product extends Model
 
     // public $timestamps = true;
 
-    // protected $fillable = ['pd_id','pd_code','pd_ct_id','pd_name','pd_price',];
+    protected $fillable = ['pd_code','pd_ct_id','pd_name','pd_price',];
 
-    protected $guarded = ['pd_id'];
+    // protected $guarded = ['pd_id'];
 
     // public function category()
     // {

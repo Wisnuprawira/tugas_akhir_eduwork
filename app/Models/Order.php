@@ -7,9 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-        // Relasi ke tabel Produk
-        public function product()
-        {
-            return $this->belongsTo(Product::class, 'or_pd_id', 'pd_name');
-        }
+
+    protected $primaryKey = 'or_id';
+    protected $fillable = ['or_id','or_pd_id','or_amount'];
+
+    // Relasi ke tabel Produk
+        // public function product()
+        // {
+        //     return $this->belongsTo(Product::class, 'or_pd_id', 'pd_name');
+        // }
 }

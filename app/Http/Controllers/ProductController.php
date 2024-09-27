@@ -39,16 +39,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request,[
-        //     'pd_code' => ['required'],
-        //     'pd_ct_id' => ['required'],
-        //     'pd_name' => ['required'],
-        //     'pd_price' => ['required'],
-        // ]);
-
-        // Product::create($request->all());
-
-        // return redirect('products')->with('success', 'Member Created Successfully');
+        // dd($request->all()); // Debug data yang dikirim
+        $validatedData = $request->validate([
+            'pd_code' => 'required',
+            'pd_ct_id' => 'required',
+            'pd_name' => 'required',
+            'pd_price' => 'required|numeric',
+        ]);
+        // Simpan produk baru
+        $product = Product::create($request->all());
+        return redirect('products')->with('success', 'Member Created Successfully');
     }
 
     /**
@@ -72,16 +72,19 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $this->validate($request,[
-            'pd_code' => ['required'],
-            'pd_ct_id' => ['required'],
-            'pd_name' => ['required'],
-            'pd_price' => ['required'],
+
+        // dd($request->all());
+
+        $validatedData = $request->validate([
+            'pd_code' => 'required',          // Pastikan kode produk tidak kosong
+            'pd_ct_id' => 'required',         // Pastikan ID kategori produk tidak kosong
+            'pd_name' => 'required',          // Pastikan nama produk tidak kosong
+            'pd_price' => 'required', // Pastikan harga produk tidak kosong dan harus berupa angka
         ]);
+        // Update data produk
         $product->update($request->all());
-
-
-        // return redirect('products');
+        // return redirect('products')->with('success', 'Product Update Successfully');
+        return response()->json(['success' => 'Product updated successfully']);
     }
 
     /**
