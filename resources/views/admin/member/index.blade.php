@@ -15,7 +15,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ url('members/create') }}" class="btn btn-sm btn-primary pull-right">Create New
+                        <a href="{{ url('members/create') }}" class="btn btn-sm btn-primary pull-right"
+                            required="">Create New
                             Member</a>
                     </div>
                     <div class="card-body">

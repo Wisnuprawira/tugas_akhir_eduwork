@@ -205,21 +205,22 @@
                     },
                     editData(event, row) {
                         this.data = this.datas[row];
-                        // console.log(this.data);
-                        // this.actionUrl = "{{ url('products') }}" + '/' + this.data.pd_id;
                         this.editStatus = true;
-                        console.log("Edit Status Sudah", this.editStatus);
+                        // console.log(this.data);
+                        this.actionUrl = "{{ url('products') }}" + '/' + this.data.pd_id;
+                        // console.log("Edit Status Sudah", this.editStatus);
                         $('#modal-default').modal('show');
                     },
-                    deleteData(event, id) {
+                    deleteData(event, pd_id) {
+                        console.log(pd_id);
                         if (confirm("Are you sure you want to delete this order?")) {
-                            axios.delete(this.actionUrl + '/' + or_id)
+                            axios.delete(this.actionUrl + '/' + pd_id)
                                 .then(response => {
                                     alert('Order has been deleted');
-                                    this.get_orders(); // Refresh data setelah berhasil dihapus
+                                    this.get_products(); // Refresh data setelah berhasil dihapus
                                 })
                                 .catch(error => {
-                                    console.log(error.response.data); // Log error untuk debugging
+                                    // console.log(error.response.data); // Log error untuk debugging
                                 });
                         }
                     },
